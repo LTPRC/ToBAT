@@ -72,34 +72,45 @@
     </bean>
     
     
-    <bean id="A" class="com.mashibing.spring.A">
-        <constructor-arg name="b" ref="B"/>
-    </bean>
-    <bean id="B" class="com.mashibing.spring.B">
-        <constructor-arg name="c" ref="C"/>
-    </bean>
-    <bean id="C" class="com.mashibing.spring.C">
-        <constructor-arg name="a" ref="A"/>
-    </bean>
+<!--     <bean id="A" class="com.mashibing.spring.A"> -->
+<!--         <constructor-arg name="b" ref="B"/> -->
+<!--     </bean> -->
+<!--     <bean id="B" class="com.mashibing.spring.B"> -->
+<!--         <constructor-arg name="c" ref="C"/> -->
+<!--     </bean> -->
+<!--     <bean id="C" class="com.mashibing.spring.C"> -->
+<!--         <constructor-arg name="a" ref="A"/> -->
+<!--     </bean> -->
 
 
-<!--     <bean id="A" class="com.mashibing.spring.A" scope="singleton"> -->
-<!--         <property name="b" ref="B"/> -->
-<!--     </bean> -->
-<!--     <bean id="B" class="com.mashibing.spring.B" scope="singleton"> -->
-<!--         <property name="c" ref="C"/> -->
-<!--     </bean> -->
-<!--     <bean id="C" class="com.mashibing.spring.C" scope="singleton"> -->
-<!--         <property name="a" ref="A"/> -->
-<!--     </bean> -->
+    <bean id="A" class="com.mashibing.spring.A" scope="singleton">
+        <property name="b" ref="B"/>
+    </bean>
+    <bean id="B" class="com.mashibing.spring.B" scope="singleton">
+        <property name="c" ref="C"/>
+    </bean>
+    <bean id="C" class="com.mashibing.spring.C" scope="singleton">
+        <property name="a" ref="A"/>
+    </bean>
     
-<!--     <bean id="A" class="com.mashibing.spring.A" scope="singleton"> -->
+<!--     <bean id="A" class="com.mashibing.spring.A" scope="prototype"> -->
 <!--         <property name="b" ref="B"/> -->
 <!--     </bean> -->
-<!--     <bean id="B" class="com.mashibing.spring.B" scope="singleton"> -->
+<!--     <bean id="B" class="com.mashibing.spring.B" scope="prototype"> -->
 <!--         <property name="c" ref="C"/> -->
 <!--     </bean> -->
-<!--     <bean id="C" class="com.mashibing.spring.C" scope="singleton"> -->
+<!--     <bean id="C" class="com.mashibing.spring.C" scope="prototype"> -->
 <!--         <property name="a" ref="A"/> -->
 <!--     </bean> -->
+
+
+<!--     <bean id="carFactory" class="com.mashibing.spring.CarFactory"></bean> -->
+<!--     <bean id="car" factory-bean="carFactory" factory-method="getCar"> -->
+<!--         <constructor-arg name="name" value="audi"></constructor-arg> -->
+<!--     </bean> -->
+
+    <bean id="carFactory" class="com.mashibing.spring.CarFactory">
+        <property name="name" value="audi"/>
+    </bean>
+    <bean id="car" factory-bean="carFactory" factory-method="getCar"></bean>
 </beans>

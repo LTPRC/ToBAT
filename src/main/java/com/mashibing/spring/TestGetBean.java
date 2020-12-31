@@ -39,5 +39,9 @@ public class TestGetBean {
         System.out.println(ToStringBuilder.reflectionToString(c));
         
 
+//        Car car = new CarFactory().getCar("Audi");
+        Car car = ctx.getBean("car", Car.class);
+        System.out.println(car.getName());
+
     }
 }
