@@ -3,6 +3,8 @@ package com.mashibing.spring;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.mashibing.spring.controller.MainController;
+
 public class TestGetBean {
 
     public static void main(String[] args) {
@@ -31,6 +33,9 @@ public class TestGetBean {
 //        A a = new A();
 //        B b = new B();
 //        C c = new C();
+//        A a = (A)ctx.getBean("a");
+//        B b = (B)ctx.getBean("b");
+//        C c = (C)ctx.getBean("c");
         A a = (A)ctx.getBean("A");
         B b = (B)ctx.getBean("B");
         C c = (C)ctx.getBean("C");
@@ -40,8 +45,11 @@ public class TestGetBean {
         
 
 //        Car car = new CarFactory().getCar("Audi");
-        Car car = ctx.getBean("car", Car.class);
-        System.out.println(car.getName());
+//        Car car = ctx.getBean("car", Car.class);
+//        System.out.println(car.getName());
+        
+        MainController controller = ctx.getBean("mainController", MainController.class);
+        controller.list();
 
     }
 }
