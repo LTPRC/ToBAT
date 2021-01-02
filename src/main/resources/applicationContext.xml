@@ -130,4 +130,8 @@
     
     <!-- 扫描指定包下的 带有Component标签的类，纳入Spring管理 -->
     <context:component-scan base-package="com.mashibing.spring"></context:component-scan>
+    
+    <bean id="companyBean" class="com.github.ltprc.spring.factorybean.CompanyFactoryBean">
+        <property name="companyInfo" value="拉勾,中关村,500"/>
+    </bean>
 </beans>

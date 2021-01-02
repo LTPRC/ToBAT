@@ -50,6 +50,9 @@ public class TestGetBean {
         
         MainController controller = ctx.getBean("mainController", MainController.class);
         controller.list();
+        
+        Object companyBean = ctx.getBean("companyBean");
+        System.out.println("bean:" + companyBean);
 
     }
 }
