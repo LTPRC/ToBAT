@@ -33,12 +33,12 @@ public class TestGetBean {
 //        A a = new A();
 //        B b = new B();
 //        C c = new C();
-//        A a = (A)ctx.getBean("a");
-//        B b = (B)ctx.getBean("b");
-//        C c = (C)ctx.getBean("c");
-        A a = (A)ctx.getBean("A");
-        B b = (B)ctx.getBean("B");
-        C c = (C)ctx.getBean("C");
+        A a = (A)ctx.getBean("a");
+        B b = (B)ctx.getBean("b");
+        C c = (C)ctx.getBean("c");
+//        A a = (A)ctx.getBean("A");
+//        B b = (B)ctx.getBean("B");
+//        C c = (C)ctx.getBean("C");
         System.out.println(ToStringBuilder.reflectionToString(a));
         System.out.println(ToStringBuilder.reflectionToString(b));
         System.out.println(ToStringBuilder.reflectionToString(c));
@@ -53,6 +53,8 @@ public class TestGetBean {
         
         Object companyBean = ctx.getBean("companyBean");
         System.out.println("bean:" + companyBean);
+        
+        ctx.close();
 
     }
 }
