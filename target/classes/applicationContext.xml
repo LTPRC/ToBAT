@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:jee="http://www.springframework.org/schema/jee"
     
@@ -14,7 +16,9 @@
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc.xsd   
     http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
-    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd">
+    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd"
+    
+    >
     
 
 <!--     <bean id="person" name="human,star" class="com.mashibing.spring.Person"> -->
@@ -57,7 +61,7 @@
     
 <!--     <bean id="person" class="com.mashibing.spring.Person" p:name="zhangsan" p:age="18" p:food-ref="food"/> -->
 
-    <bean id="person2" class="com.mashibing.spring.Person2">
+    <bean id="person2" class="com.mashibing.spring.Person2" lazy-init="true">
         <property name="name">
             <value>马小六</value>
         </property>
@@ -72,15 +76,15 @@
     </bean>
     
     
-    <bean id="A" class="com.mashibing.spring.A">
-        <constructor-arg name="b" ref="B"/>
-    </bean>
-    <bean id="B" class="com.mashibing.spring.B">
-        <constructor-arg name="c" ref="C"/>
-    </bean>
-    <bean id="C" class="com.mashibing.spring.C">
-        <constructor-arg name="a" ref="A"/>
-    </bean>
+<!--     <bean id="A" class="com.mashibing.spring.A"> -->
+<!--         <constructor-arg name="b" ref="B"/> -->
+<!--     </bean> -->
+<!--     <bean id="B" class="com.mashibing.spring.B"> -->
+<!--         <constructor-arg name="c" ref="C"/> -->
+<!--     </bean> -->
+<!--     <bean id="C" class="com.mashibing.spring.C"> -->
+<!--         <constructor-arg name="a" ref="A"/> -->
+<!--     </bean> -->
 
 
 <!--     <bean id="A" class="com.mashibing.spring.A" scope="singleton"> -->
@@ -93,13 +97,42 @@
 <!--         <property name="a" ref="A"/> -->
 <!--     </bean> -->
     
-<!--     <bean id="A" class="com.mashibing.spring.A" scope="singleton"> -->
+<!--     <bean id="A" class="com.mashibing.spring.A" scope="prototype"> -->
 <!--         <property name="b" ref="B"/> -->
 <!--     </bean> -->
-<!--     <bean id="B" class="com.mashibing.spring.B" scope="singleton"> -->
+<!--     <bean id="B" class="com.mashibing.spring.B" scope="prototype"> -->
 <!--         <property name="c" ref="C"/> -->
 <!--     </bean> -->
-<!--     <bean id="C" class="com.mashibing.spring.C" scope="singleton"> -->
+<!--     <bean id="C" class="com.mashibing.spring.C" scope="prototype"> -->
 <!--         <property name="a" ref="A"/> -->
 <!--     </bean> -->
+
+
+<!--     <bean id="carFactory" class="com.mashibing.spring.CarFactory"></bean> -->
+<!--     <bean id="car" factory-bean="carFactory" factory-method="getCar"> -->
+<!--         <constructor-arg name="name" value="audi"></constructor-arg> -->
+<!--     </bean> -->
+
+    <bean id="carFactory" class="com.mashibing.spring.CarFactory">
+        <property name="name" value="audi"/>
+    </bean>
+    <bean id="car" factory-bean="carFactory" factory-method="getCar" init-method="before" destroy-method="after"></bean>
+    
+    
+    <bean id="a" class="com.mashibing.spring.A" autowire="byName"></bean>
+    <bean id="b" class="com.mashibing.spring.B" autowire="byName"></bean>
+    <bean id="c" class="com.mashibing.spring.C" autowire="byName"></bean>
+
+<!--     <bean id="A" class="com.mashibing.spring.A" autowire="constructor"></bean> -->
+<!--     <bean id="B" class="com.mashibing.spring.B" autowire="constructor"></bean> -->
+<!--     <bean id="C" class="com.mashibing.spring.C" autowire="constructor"></bean> -->
+    
+    
+    <!-- 扫描指定包下的 带有Component标签的类，纳入Spring管理 -->
+    <context:component-scan base-package="com.mashibing.spring"></context:component-scan>
+    <context:component-scan base-package="com.github.ltprc.spring"></context:component-scan>
+    
+    <bean id="companyBean" class="com.github.ltprc.spring.factorybean.CompanyFactoryBean">
+        <property name="companyInfo" value="拉勾,中关村,500"/>
+    </bean>
 </beans>
