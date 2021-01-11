@@ -11,5 +11,9 @@ public class JolTest {
     public static void main(String[] args) {
         M m = new M();
         System.out.println(ClassLayout.parseInstance(m).toPrintable());
+        synchronized(m) {
+            System.out.println(ClassLayout.parseInstance(m).toPrintable());
+        }
+        System.out.println(ClassLayout.parseInstance(m).toPrintable());
     }
 }
