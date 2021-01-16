@@ -1,12 +1,12 @@
 package com.github.ltprc.javaio;
 
-import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.Writer;
 
-public class FileOutputStreamTest {
+public class FileWriterTest {
     /**
      * 一次写完整个字符串
      * @param filePath
@@ -17,17 +17,15 @@ public class FileOutputStreamTest {
         File f = new File(filePath);
         try {
             //如果第二个参数为false或者不填写，则不能追加写文件，会覆盖
-            OutputStream out = new FileOutputStream(f, true);
-            //因为是字节流，所以要转化成字节数组进行输出
-            byte[] b = data.getBytes();
-            out.write(b);
-            out.close();
+            Writer fw = new FileWriter(f, true);
+            fw.write(data);
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     /**
-     * 逐字节写字符串
+     * 逐字符写字符串
      * @param filePath
      */
     public static void writeFileByByte(String filePath) {
@@ -36,13 +34,11 @@ public class FileOutputStreamTest {
         File f = new File(filePath);
         try {
             //如果第二个参数为false或者不填写，则不能追加写文件，会覆盖
-            OutputStream out = new FileOutputStream(f, true);
-            //因为是字节流，所以要转化成字节数组进行输出
-            byte[] b = data.getBytes();
-            for (int i = 0; i < b.length; i++) {
-                out.write(b[i]);
+            Writer fw = new FileWriter(f, true);
+            for (int i = 0; i < data.length(); i++) {
+                fw.write(data.charAt(i));
             }
-            out.close();
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,21 +54,19 @@ public class FileOutputStreamTest {
         File f = new File(filePath);
         try {
             //如果第二个参数为false或者不填写，则不能追加写文件，会覆盖
-            OutputStream out = new FileOutputStream(f, true);
-            OutputStream bos = new BufferedOutputStream(out);
+            Writer fw = new FileWriter(f, true);
+            Writer bw = new BufferedWriter(fw);
             //因为是字节流，所以要转化成字节数组进行输出
-            byte[] b = data.getBytes();
-            bos.write(b);
-            bos.flush();
-            bos.close();
-            out.close();
+            bw.write(data);
+            bw.flush();
+            bw.close();
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     /**
-     * 逐字节写字符串
-     * 创建BufferedOutputStream对象，构造方法中传递FileOutputStream对象，提高FileOutputStream对象读取效率。
+     * 逐字符写字符串
      * @param filePath
      */
     public static void writeFileByByteWithBuffer(String filePath) {
@@ -81,16 +75,14 @@ public class FileOutputStreamTest {
         File f = new File(filePath);
         try {
             //如果第二个参数为false或者不填写，则不能追加写文件，会覆盖
-            OutputStream out = new FileOutputStream(f, true);
-            OutputStream bos = new BufferedOutputStream(out);
-            //因为是字节流，所以要转化成字节数组进行输出
-            byte[] b = data.getBytes();
-            for (int i = 0; i < b.length; i++) {
-                bos.write(b[i]);
+            Writer fw = new FileWriter(f, true);
+            Writer bw = new BufferedWriter(fw);
+            for (int i = 0; i < data.length(); i++) {
+                fw.write(data.charAt(i));
             }
-            bos.flush();
-            bos.close();
-            out.close();
+            bw.flush();
+            bw.close();
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

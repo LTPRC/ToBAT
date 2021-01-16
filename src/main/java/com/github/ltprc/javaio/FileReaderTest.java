@@ -1,12 +1,12 @@
 package com.github.ltprc.javaio;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 
-public class FileInputStreamTest {
+public class FileReaderTest {
     /**
      * 一次读完整个文件
      * @param filePath
@@ -14,31 +14,35 @@ public class FileInputStreamTest {
     public static void readFile(String filePath) {
         File f = new File(filePath);
         try {
-            InputStream in = new FileInputStream(f);
-            byte[] b = new byte[(int) f.length()];
-            in.read(b);
-            in.close();
-            System.out.println(new String(b));
+            Reader fr = new FileReader(f);
+            // 创建字符数组，其长度就是文件的长度
+            char[] all = new char[(int) f.length()];
+            // 以字符流的形式读取文件所有内容
+            fr.read(all);
+            System.out.println(all);
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     /**
-     * 逐字节读文件
+     * 逐字符读文件
      * @param filePath
      */
     public static void readFileByByte(String filePath) {
         File f = new File(filePath);
         try {
-            InputStream in = new FileInputStream(f);
-            byte[] b = new byte[(int) f.length()];
+            Reader fr = new FileReader(f);
+            // 创建字符数组，其长度就是文件的长度
+            char[] all = new char[(int) f.length()];
             int temp = -1;
             int index = 0;
-            while ((temp = in.read()) != -1) {
-                b[index++] = (byte) temp;
+            // 以字符流的形式读取文件所有内容
+            while ((temp = fr.read()) != -1) {
+                all[index++] = (char) temp;
             }
-            in.close();
-            System.out.println(new String(b));
+            System.out.println(all);
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,36 +55,39 @@ public class FileInputStreamTest {
     public static void readFileWithBuffer(String filePath) {
         File f = new File(filePath);
         try {
-            InputStream in = new FileInputStream(f);
-            InputStream bis = new BufferedInputStream(in);
-            byte[] b = new byte[(int) f.length()];
-            bis.read(b);
-            bis.close();
-            in.close();
-            System.out.println(new String(b));
+            Reader fr = new FileReader(f);
+            Reader br = new BufferedReader(fr);
+            // 创建字符数组，其长度就是文件的长度
+            char[] all = new char[(int) f.length()];
+            // 以字符流的形式读取文件所有内容
+            br.read(all);
+            System.out.println(all);
+            br.close();
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     /**
-     * 逐字节读文件
-     * 创建BufferedInputStream对象，构造方法中传递FileInputStream对象，提高FileInputStream对象读取效率。
+     * 逐字符读文件
      * @param filePath
      */
     public static void readFileByByteWithBuffer(String filePath) {
         File f = new File(filePath);
         try {
-            InputStream in = new FileInputStream(f);
-            InputStream bis = new BufferedInputStream(in);
-            byte[] b = new byte[(int) f.length()];
+            Reader fr = new FileReader(f);
+            Reader br = new BufferedReader(fr);
+            // 创建字符数组，其长度就是文件的长度
+            char[] all = new char[(int) f.length()];
             int temp = -1;
             int index = 0;
-            while ((temp = bis.read()) != -1) {
-                b[index++] = (byte) temp;
+            // 以字符流的形式读取文件所有内容
+            while ((temp = br.read()) != -1) {
+                all[index++] = (char) temp;
             }
-            bis.close();
-            in.close();
-            System.out.println(new String(b));
+            System.out.println(all);
+            br.close();
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
