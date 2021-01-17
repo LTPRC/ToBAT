@@ -5,7 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class LRUCacheThreadSafe {
+public class LRUCacheThreadSafe<K, V> {
     private final static int READ_LOCK_FLAG = 1;
     private final static int WRITE_LOCK_FLAG = 1 << 1;
     private final ReadWriteLock rwlock = new ReentrantReadWriteLock();  
@@ -15,10 +15,10 @@ public class LRUCacheThreadSafe {
     private class Node {
         Node prev;
         Node next;
-        int key;
-        int value;
+        K key;
+        V value;
 
-        public Node(int key, int value) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.prev = null;
@@ -27,11 +27,11 @@ public class LRUCacheThreadSafe {
     }
 
     private int capacity;
-    private HashMap<Integer, Node> hm = new HashMap<Integer, Node>(); 
+    private HashMap<K, Node> hm = new HashMap<K, Node>(); 
     //双向链表比数组更有利于Insert和Delete的操纵，所以使用链表记录时间顺序下的数据。此外，需要记录链表的head和tail，从而方便进行移动到tail或者删除head的操作：
     // head和tail本身内容没有含义，head.next作为最近最少使用的item, tail.prev为最近使用过的item.
-    private Node head = new Node(-1, -1);
-    private Node tail = new Node(-1, -1);
+    private Node head = new Node(null, null);
+    private Node tail = new Node(null, null);
 
     // @param capacity, an integer
     public LRUCacheThreadSafe(int capacity) {
@@ -41,14 +41,14 @@ public class LRUCacheThreadSafe {
     }
 
     //在get时，如果存在，只需把对应item更新到tail.prev位置即可。
-    // @return an integer
-    public int get(int key) {
+    // @return
+    public V get(K key) {
         int lockFlag = 0;
         try {
             readLock.lock();
             lockFlag ^= READ_LOCK_FLAG;
             if (!hm.containsKey(key)) {
-                return -1;
+                return null;
             }
             readLock.unlock();
             lockFlag ^= READ_LOCK_FLAG;
@@ -68,15 +68,15 @@ public class LRUCacheThreadSafe {
 
     //在set时，如果超出capacity，则删除head.next位置的item, 同时将要插入的item放入tail.prev位置。
 
-    // @param key, an integer
-    // @param value, an integer
+    // @param key
+    // @param value
     // @return nothing
-    public void set(int key, int value) {
+    public void set(K key, V value) {
         int lockFlag = 0;
         try {
             writeLock.lock();
             lockFlag ^= WRITE_LOCK_FLAG;
-            if (get(key) != -1) {
+            if (get(key) != null) {
                 hm.get(key).value = value;
                 return;
             }

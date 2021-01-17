@@ -2,14 +2,14 @@ package com.github.ltprc.algorithm.lru;
 
 import java.util.HashMap;
 
-public class LRUCache {
+public class LRUCache<K, V> {
     private class Node {
         Node prev;
         Node next;
-        int key;
-        int value;
+        K key;
+        V value;
 
-        public Node(int key, int value) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.prev = null;
@@ -18,11 +18,11 @@ public class LRUCache {
     }
 
     private int capacity;
-    private HashMap<Integer, Node> hm = new HashMap<Integer, Node>(); 
+    private HashMap<K, Node> hm = new HashMap<K, Node>(); 
     //双向链表比数组更有利于Insert和Delete的操纵，所以使用链表记录时间顺序下的数据。此外，需要记录链表的head和tail，从而方便进行移动到tail或者删除head的操作：
     // head和tail本身内容没有含义，head.next作为最近最少使用的item, tail.prev为最近使用过的item.
-    private Node head = new Node(-1, -1);
-    private Node tail = new Node(-1, -1);
+    private Node head = new Node(null, null);
+    private Node tail = new Node(null, null);
 
     // @param capacity, an integer
     public LRUCache(int capacity) {
@@ -32,10 +32,9 @@ public class LRUCache {
     }
 
     //在get时，如果存在，只需把对应item更新到tail.prev位置即可。
-    // @return an integer
-    public int get(int key) {
+    public V get(K key) {
         if (!hm.containsKey(key)) {
-            return -1;
+            return null;
         }
         Node current = hm.get(key);
         current.prev.next = current.next;
@@ -48,11 +47,11 @@ public class LRUCache {
 
     //在set时，如果超出capacity，则删除head.next位置的item, 同时将要插入的item放入tail.prev位置。
 
-    // @param key, an integer
-    // @param value, an integer
+    // @param key
+    // @param value
     // @return nothing
-    public void set(int key, int value) {
-        if (get(key) != -1) {
+    public void set(K key, V value) {
+        if (get(key) != null) {
             hm.get(key).value = value;
             return;
         }
