@@ -8,9 +8,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class BioClient implements AutoCloseable {
+public class BIOClient implements AutoCloseable {
     private Socket client;
-    public BioClient() throws IOException {
+    public BIOClient() throws IOException {
         this.client = new Socket(ServerConfig.SERVER_IP, ServerConfig.SERVER_PORT);
         System.out.println("已经成功的连接到了服务器端，可以进行消息的发送处理。");
         OutputStream outputStream = client.getOutputStream();
@@ -33,6 +33,6 @@ public class BioClient implements AutoCloseable {
         this.client.close();
     }
     public static void main(String[] args) throws Exception {
-        BioClient bioClient = new BioClient() ;
+        BIOClient bioClient = new BIOClient();
     }
 }

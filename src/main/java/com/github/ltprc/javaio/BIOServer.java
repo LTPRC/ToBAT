@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class BioServer implements AutoCloseable {
+public class BIOServer implements AutoCloseable {
     private ServerSocket serverSocket;
-    public BioServer() throws Exception {
+    public BIOServer() throws Exception {
         this.serverSocket = new ServerSocket(ServerConfig.SERVER_PORT);   // 进行服务端的Socket启动
         System.out.println("ECHO服务器端已经启动了，该服务在" + ServerConfig.SERVER_PORT + "端口上监听....");
         boolean serverFlag = true ;
@@ -45,6 +45,6 @@ public class BioServer implements AutoCloseable {
         this.serverSocket.close();
     }
     public static void main(String[] args) throws Exception {
-        BioServer bioServer = new BioServer() ;
+        BIOServer bioServer = new BIOServer() ;
     }
 }
