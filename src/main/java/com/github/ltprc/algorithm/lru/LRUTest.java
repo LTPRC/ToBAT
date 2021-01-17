@@ -1,7 +1,6 @@
 package com.github.ltprc.algorithm.lru;
 
 public class LRUTest {
-
     public static void main(String[] args) {
         LRUCache<Integer, Integer> cache1 = new LRUCache<>(2);
         cache1.set(1,10);
@@ -31,6 +30,16 @@ public class LRUTest {
         System.out.println(cache4.get(1));
         System.out.println(cache4.get(3));
 
+        LFUCache<Integer, Integer> cache5 = new LFUCache<>(2);
+        cache5.set(1,10);
+        cache5.set(2,20);
+        cache5.set(3,30);
+        cache5.set(1,11);
+        cache5.set(2,21);
+        cache5.set(1,12);
+        cache5.set(2,22);
+        cache5.set(3,31);
+        System.out.println(cache5.get(3));
+        System.out.println(cache5.get(1));
     }
-
 }
