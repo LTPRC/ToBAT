@@ -1,7 +1,10 @@
 package com.github.ltprc.algorithm;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * 字典树的节点类型
@@ -119,5 +122,32 @@ public class TrieTree {
         }else{
             cur.nodeMap.remove(delch);
         }
+    }
+
+    /**
+     * 打印最长公共前缀
+     */
+    public String getLongestPrefix() {
+        StringBuilder sb = new StringBuilder();
+        TrieNode cur = root;
+        while (true) {
+            if (cur.freqs > 0 || cur.nodeMap.isEmpty() || cur.nodeMap.size() > 1) {
+                break;
+            }
+            Set<Entry<Character, TrieNode>> set = cur.nodeMap.entrySet();
+            Iterator itr = set.iterator();
+            Entry<Character, TrieNode> entry = (Entry<Character, TrieNode>)itr.next();
+            cur = entry.getValue();
+            sb.append(cur.ch);
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        TrieTree trieTree = new TrieTree();
+        trieTree.add("super");
+        trieTree.add("superman");
+        trieTree.add("superb");
+        System.out.println(trieTree.getLongestPrefix());
     }
 }
