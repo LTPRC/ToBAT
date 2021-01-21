@@ -1,5 +1,6 @@
 package com.github.ltprc.algorithm;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -74,28 +75,6 @@ public class AntFinancialTest01 {
         return rst;
     }
 
-    public static List<Integer> function2(List<Integer> list1, List<Integer> list2) {
-        if (list1 == null) {
-            return list2;
-        } else if (list2 == null) {
-            return list1;
-        }
-        List<Integer> rst = new LinkedList<>();
-        int index1 = 0, index2 = 0;
-        while (index1 < list1.size() || index2 < list2.size()) {
-            if (index2 == list2.size() || (index1 < list1.size() && list1.get(index1) < list2.get(index2))) {
-                if (rst.isEmpty() || rst.get(index1) != rst.get(rst.size() - 1)) {
-                    rst.add(list1.get(index1++));
-                }
-            } else {
-                if (rst.isEmpty() || list1.get(index1) != rst.get(rst.size() - 1)) {
-                    rst.add(list2.get(index2++));
-                }
-            }
-        }
-        return rst;
-    }
-
     public static <T> void function3(List<T> list) {
         if (list == null || list.isEmpty()) {
             return;
@@ -132,10 +111,17 @@ public class AntFinancialTest01 {
     }
 
     public static <T> int compareMethod(List<T> list, int L, int R) {
-        //利用反射检查T是否实现compareTo方法
-        
         T t1 = list.get(L);
         T t2 = list.get(R);
+        //利用反射检查T是否实现compareTo方法
+        Class clazz = t1.getClass();
+        try {
+            Method compareTo = clazz.getDeclaredMethod("compareTo", clazz);
+            compareTo.setAccessible(true);
+            return (int) compareTo.invoke(t1, t2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String s1 = "";
         String s2 = "";
         if (t1 == t2) {
