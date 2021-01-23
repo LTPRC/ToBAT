@@ -3,6 +3,7 @@ package com.github.ltprc.kafka;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class Consumer {
@@ -29,18 +31,25 @@ public class Consumer {
         init("group1");
         consumer.subscribe(Pattern.compile("^topic.*"));
 //        consumer.subscribe(Arrays.asList("topic01"));
-        ConsumerRecords consumerRecords = consumer.poll(Duration.ofMillis(100));
-        while (consumerRecords.isEmpty()) {
-            Iterator<ConsumerRecord<String, String>> recordIterator = consumerRecords.iterator();
-            while (consumerRecords.isEmpty()) {
+        
+        //指定消费partition
+        List<TopicPartition> partitions = Arrays.asList(new TopicPartition("topic01", 0));
+        consumer.assign(partitions);
+        //指定offset
+//        consumer.seekToBeginning(partitions);
+        consumer.seek(new TopicPartition("topic01", 0), 1);
+        
+        while (true) {
+            ConsumerRecords consumerRecords = consumer.poll(Duration.ofSeconds(1));
+            if (!consumerRecords.isEmpty()) {
+                Iterator<ConsumerRecord<String, String>> recordIterator = consumerRecords.iterator();
                 while (recordIterator.hasNext()) {
                     ConsumerRecord<String, String> record = recordIterator.next();
                     System.out.println("Receive: topic-" + record.topic() + " partition-" + record.partition() + " offset-" + record.offset() 
                     + " key-" + record.key() + " value-" + record.value());
                 }
             }
-            consumerRecords = consumer.poll(Duration.ofMillis(100));
-        };
-        close();
+        }
+//        close();
     }
 }
