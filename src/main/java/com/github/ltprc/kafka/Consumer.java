@@ -20,7 +20,8 @@ public class Consumer {
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConfig.KAFKA_HOST + ":" + KafkaConfig.KAFKA_PORT);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, UserDefineDeserializer.class.getName());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         consumer = new KafkaConsumer<String, String>(props);
     }
@@ -33,11 +34,11 @@ public class Consumer {
 //        consumer.subscribe(Arrays.asList("topic01"));
         
         //指定消费partition
-        List<TopicPartition> partitions = Arrays.asList(new TopicPartition("topic01", 0));
-        consumer.assign(partitions);
+//        List<TopicPartition> partitions = Arrays.asList(new TopicPartition("topic01", 0));
+//        consumer.assign(partitions);
         //指定offset
 //        consumer.seekToBeginning(partitions);
-        consumer.seek(new TopicPartition("topic01", 0), 1);
+//        consumer.seek(new TopicPartition("topic01", 0), 1);
         
         while (true) {
             ConsumerRecords consumerRecords = consumer.poll(Duration.ofSeconds(1));
