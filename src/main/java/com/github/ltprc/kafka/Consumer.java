@@ -1,7 +1,9 @@
 package com.github.ltprc.kafka;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
@@ -9,6 +11,9 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.kafka.clients.consumer.OffsetCommitCallback;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class Consumer {
@@ -30,6 +35,9 @@ public class Consumer {
         //如果未找到消费者组的先前偏移量，则向消费者抛出异常
 //        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "none");
 
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
+        
         consumer = new KafkaConsumer<String, String>(props);
     }
     public static void close() {
@@ -47,6 +55,9 @@ public class Consumer {
 //        consumer.seekToBeginning(partitions);
 //        consumer.seek(new TopicPartition("topic01", 0), 1);
         
+        //记录分区的消费元数据信息
+        Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
+        
         while (true) {
             ConsumerRecords consumerRecords = consumer.poll(Duration.ofSeconds(1));
             if (!consumerRecords.isEmpty()) {
@@ -55,6 +66,15 @@ public class Consumer {
                     ConsumerRecord<String, String> record = recordIterator.next();
                     System.out.println("Receive: topic-" + record.topic() + " partition-" + record.partition() + " offset-" + record.offset() 
                     + " key-" + record.key() + " value-" + record.value());
+                    
+                    offsets.put(new TopicPartition(record.topic(), record.partition()), new OffsetAndMetadata(record.offset()));
+                    //异步提交
+                    consumer.commitAsync(offsets, new OffsetCommitCallback() {
+                        @Override
+                        public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
+                            System.out.println("offsets:" + offsets + "\texceptions:" + exception);
+                        }
+                    });
                 }
             }
         }
