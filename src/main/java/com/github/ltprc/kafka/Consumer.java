@@ -1,9 +1,7 @@
 package com.github.ltprc.kafka;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
@@ -11,7 +9,6 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class Consumer {
@@ -23,6 +20,16 @@ public class Consumer {
 //        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, UserDefineDeserializer.class.getName());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+
+        //定义订阅点
+        //自动将偏移量重置为最早的偏移量
+//        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        //自动将偏移量重置为最新早的偏移量
+        //如果系统中没有消费者的偏移量，依然会读取最早的
+//        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        //如果未找到消费者组的先前偏移量，则向消费者抛出异常
+//        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "none");
+
         consumer = new KafkaConsumer<String, String>(props);
     }
     public static void close() {

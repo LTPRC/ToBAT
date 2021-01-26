@@ -20,7 +20,7 @@ public class Producer {
         props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, UserDefinePartitioner.class.getName());
         
         //≈‰÷√◊‘∂®“Â¿πΩÿ∆˜
-        props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, UserDefinePartitioner.class.getName());
+        props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, UserDefineProducerInterceptor.class.getName());
         
         producer = new KafkaProducer<String, String>(props);
     }

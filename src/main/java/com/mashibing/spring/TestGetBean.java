@@ -1,7 +1,9 @@
 package com.mashibing.spring;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.mashibing.spring.controller.MainController;
 
@@ -55,6 +57,10 @@ public class TestGetBean {
         System.out.println("bean:" + companyBean);
         
         ctx.close();
+
+        ApplicationContext context1 = new ClassPathXmlApplicationContext("application-context.xml");
+        ApplicationContext context2 = new FileSystemXmlApplicationContext("/home/user/conf/application-context.xml");
+        
 
     }
 }
