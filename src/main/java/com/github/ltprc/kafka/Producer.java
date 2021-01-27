@@ -22,6 +22,14 @@ public class Producer {
         //配置自定义拦截器
         props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, UserDefineProducerInterceptor.class.getName());
         
+        //设置Acks & retires
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
+        props.put(ProducerConfig.RETRIES_CONFIG, 3);
+        props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 100);
+        //设置幂等写
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+        props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
+        
         producer = new KafkaProducer<String, String>(props);
     }
     public static void close() {
