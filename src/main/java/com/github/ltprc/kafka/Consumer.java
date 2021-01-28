@@ -35,8 +35,11 @@ public class Consumer {
         //如果未找到消费者组的先前偏移量，则向消费者抛出异常
 //        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "none");
 
-        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
+//        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+//        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+
+        props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
         
         consumer = new KafkaConsumer<String, String>(props);
     }

@@ -1,6 +1,7 @@
 package com.github.ltprc.kafka;
 
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -29,6 +30,16 @@ public class Producer {
         //设置幂等写
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
+        
+        //配置事务ID
+        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "transaction-id" + UUID.randomUUID().toString());
+        //配置Kafka批处理大小
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 1024);
+        //配置大小不满足批处理大小时的自动发送等待时间
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 5);
+
+
+
         
         producer = new KafkaProducer<String, String>(props);
     }
