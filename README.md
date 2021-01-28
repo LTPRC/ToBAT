@@ -1,5 +1,5 @@
 # Project ToBAT (In-progress)
-这个项目是我自2017年以来对Java开发所整理的学习笔记的一个精华提炼，主观分类成了如下15个类别。今后会持续保持补充，希望能够帮助到初出茅庐的毕业学子，以及得到资深同事们的多多指正。
+Project ToBAT is continously being constructed.
 
 ------
 
