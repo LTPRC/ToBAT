@@ -1,4 +1,4 @@
-package com.mashibing.spring;
+package com.github.ltprc.spring;
 
 import java.util.List;
 import java.util.Map;

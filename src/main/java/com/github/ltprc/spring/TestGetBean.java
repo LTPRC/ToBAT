@@ -1,11 +1,11 @@
-package com.mashibing.spring;
+package com.github.ltprc.spring;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.mashibing.spring.controller.MainController;
+import com.github.ltprc.spring.controller.MainController;
 
 public class TestGetBean {
 

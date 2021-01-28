@@ -1,4 +1,4 @@
-package com.mashibing.spring.entity;
+package com.github.ltprc.spring.entity;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;

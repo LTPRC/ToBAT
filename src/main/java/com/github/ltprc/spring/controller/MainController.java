@@ -1,11 +1,10 @@
-package com.mashibing.spring.controller;
+package com.github.ltprc.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import com.mashibing.spring.entity.User;
-import com.mashibing.spring.service.MainService;
+import com.github.ltprc.spring.entity.User;
+import com.github.ltprc.spring.service.MainService;
 
 @Component
 public class MainController {

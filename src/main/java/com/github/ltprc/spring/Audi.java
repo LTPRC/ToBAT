@@ -1,4 +1,4 @@
-package com.mashibing.spring;
+package com.github.ltprc.spring;
 
 public class Audi implements Car {
     

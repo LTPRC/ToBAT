@@ -1,8 +1,8 @@
-package com.mashibing.spring.service;
+package com.github.ltprc.spring.service;
 
 import org.springframework.stereotype.Component;
 
-import com.mashibing.spring.entity.User;
+import com.github.ltprc.spring.entity.User;
 
 /**
  * 处理具体业务逻辑
