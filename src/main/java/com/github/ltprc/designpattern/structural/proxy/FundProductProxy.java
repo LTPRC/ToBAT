@@ -1,4 +1,4 @@
-package com.github.ltprc.designpattern.creational.proxy;
+package com.github.ltprc.designpattern.structural.proxy;
 
 public class FundProductProxy implements Products{
     Products product;

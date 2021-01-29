@@ -1,4 +1,4 @@
-package com.github.ltprc.designpattern.creational.proxy;
+package com.github.ltprc.designpattern.structural.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
