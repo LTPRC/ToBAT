@@ -12,6 +12,9 @@ import java.util.Scanner;
  * 输出描述：
  * 输出该数值的近似整数值
  * 
+ * 友情提示：
+ * 提交答案时，不要忘记提交import命令。
+ * 类名称确保为Main且不要使用public以外的修饰符。
  * @author tuoli
  *
  */
@@ -23,6 +26,9 @@ public class Main {
         double d = Double.parseDouble(s);
         long result = Math.round(d);
 
+        output(s);
+    }
+    public static void output(String result) {
         System.out.println(result);
     }
 }

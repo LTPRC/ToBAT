@@ -12,16 +12,24 @@ import java.util.Scanner;
  * 输出描述：
  * ...
  * 
+ * 友情提示：
+ * 提交答案时，不要忘记提交import命令。
+ * 类名称确保为Main且不要使用public以外的修饰符。
  * @author tuoli
  *
  */
-public class MainTemplate {
+public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
 
-        String result = s;
+        /**
+         * Your code
+         */
 
+        output(s);
+    }
+    public static void output(String result) {
         System.out.println(result);
     }
 }
