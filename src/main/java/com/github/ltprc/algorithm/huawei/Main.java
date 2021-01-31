@@ -21,15 +21,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String s = in.nextLine();
+        while (in.hasNext()) {
+            String s = in.nextLine();
 
-        /**
-         * Your code
-         */
+            /**
+             * Your code here.
+             */
 
-        output(s);
-    }
-    public static void output(Object result) {
-        System.out.println(result);
+            System.out.println("");
+        }
     }
 }
