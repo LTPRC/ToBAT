@@ -1,4 +1,4 @@
-package com.github.ltprc.algorithm.huawei.HJ19;
+package com.github.ltprc.algorithm.huawei.HJ45;
 
 import java.util.ArrayList;
 import java.util.List;
