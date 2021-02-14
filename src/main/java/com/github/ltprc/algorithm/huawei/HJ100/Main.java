@@ -3,8 +3,6 @@ package com.github.ltprc.algorithm.huawei.HJ100;
 import java.util.Scanner;
 
 /**
- * TODO 题目不讲武德，测试案例有超过int的值
- * 
  * 题目描述
  * 功能:等差数列 2，5，8，11，14。。。。
  * 输入:正整数N >0

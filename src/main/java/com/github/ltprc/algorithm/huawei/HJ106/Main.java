@@ -3,8 +3,6 @@ package com.github.ltprc.algorithm.huawei.HJ106;
 import java.util.Scanner;
 
 /**
- * TODO 题目不讲武德，测试案例有超过int的值
- * 
  * 题目描述
  * 将一个字符串str的内容颠倒过来，并输出。str的长度不超过100个字符。
  * 

@@ -3,8 +3,6 @@ package com.github.ltprc.algorithm.huawei.HJ33;
 import java.util.Scanner;
 
 /**
- * TODO 题目不讲武德，测试案例有超过int的值
- * 
  * 题目描述
  * 原理：ip地址的每段可以看成是一个0-255的整数，把每段拆分成一个二进制形式组合起来，然后把这个二进制数转变成
 一个长整数。

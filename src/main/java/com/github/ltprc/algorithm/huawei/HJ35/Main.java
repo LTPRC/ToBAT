@@ -3,8 +3,6 @@ package com.github.ltprc.algorithm.huawei.HJ35;
 import java.util.Scanner;
 
 /**
- * TODO 题目不讲武德，测试案例有超过int的值
- * 
  * 题目描述
  * 蛇形矩阵是由1开始的自然数依次排列成的一个矩阵上三角形。
  * 例如，当输入5时，应该输出的三角形为：
