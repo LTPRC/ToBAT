@@ -3,6 +3,12 @@ package com.github.ltprc.algorithm.huawei.HJ81;
 import java.util.Scanner;
 
 /**
+ * TODO 牛客网无法通过测试案例
+ * wrlpucdezsxphlzrvuguyrwtguvvspncbimokssdzjbms
+ * rkjmbnvijlrrrmwfpnufqnmqfgpgythahgfeyfvmvhzczrgltqrwlgp
+ * ofecstivslnr
+ * eorfrharlvsegeuysdr
+ * 
  * 题目描述
  * 判断短字符串中的所有字符是否在长字符串中全部出现。
  * 请注意本题有多组样例输入。
@@ -38,7 +44,10 @@ public class Main {
             while (bitmap1 != 0 && bitmap2 != 0) {
                 if ((bitmap1 & 1) == 1 && (bitmap2 & 1) == 0) {
                     System.out.println(false);
+                    return;
                 }
+                bitmap1 /= 2;
+                bitmap2 /= 2;
             }
             System.out.println(true);
         }
