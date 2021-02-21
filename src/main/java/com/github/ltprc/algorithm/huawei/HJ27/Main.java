@@ -27,7 +27,7 @@ import java.util.Set;
  * 友情提示：
  * 提交答案时，不要忘记提交import命令。
  * 类名称确保为Main且不要使用public以外的修饰符。
- * @author SHY
+ * @author tuoli
  *
  */
 public class Main {
